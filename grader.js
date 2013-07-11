@@ -1,4 +1,6 @@
-utomatically grade files for the presence of specified HTML tags/attributes.
+#!/usr/bin/env node
+/*
+Automatically grade files for the presence of specified HTML tags/attributes.
 Uses commander.js and cheerio. Teaches command line application development
 and basic DOM parsing.
 
@@ -48,7 +50,7 @@ var checkHtmlFile = function(htmlfile, checksfile) {
     var out = {};
     for(var ii in checks) {
         var present = $(checks[ii]).length > 0;
-       out[checks[ii]] = present;
+        out[checks[ii]] = present;
     }
     return out;
 };
@@ -58,6 +60,7 @@ var clone = function(fn) {
     // http://stackoverflow.com/a/6772648
     return fn.bind({});
 };
+
 if(require.main == module) {
     program
         .option('-c, --checks <check_file>', 'Path to checks.json', clone(assertFileExists), CHECKSFILE_DEFAULT)
@@ -68,5 +71,4 @@ if(require.main == module) {
     console.log(outJson);
 } else {
     exports.checkHtmlFile = checkHtmlFile;
-:wq
-:}
+}
